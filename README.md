@@ -28,3 +28,7 @@ Main features of the application are:
 * Install dependencies
 
   ```pip install -r requirements.txt```
+
+* Download Sentiment-analysis model
+  1. Download file https://drive.google.com/file/d/1_JUJK-wQ6xOMOXjAl1lyAubqJJI1vMH5/view?usp=sharing
+  2. Put it into sentiment_analysis/models/combined_corpora_processed.bin
