@@ -13,3 +13,18 @@ Main features of the application are:
  * integration of FlatZone offers
  * extraction of municipality services
  * visualization of municipality services
+
+## How to set-up things
+* Instal virtualenvwrapper
+
+  ```pip install virtualenvwrapper```
+  
+* Clone the repository
+* Go to the folder with repository
+* Make virtual environment
+
+  ```mkvirtualenv -p /usr/bin/python3 love_have_and_prague```
+  
+* Install dependencies
+
+  ```pip install -r requirements.txt```
