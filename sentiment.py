@@ -1,39 +1,20 @@
-import os
-import sys
-import warnings
+import json
 
-from sentiment_analysis.model import CNN
-
-
-# Disable
-def blockPrint():
-    sys.stdout = open(os.devnull, 'w')
-    sys.stderr = open(os.devnull, 'w')
-    warnings.filterwarnings("ignore")
+from scraper import load_tweets
+from sentiment_analysis.main import sentiment
 
 
-# Restore
-def enablePrint():
-    sys.stdout = sys.__stdout__
-    sys.stderr = sys.__stdout__
-    warnings.simplefilter('module')
+def main():
+    # load json
+    data = load_tweets('data/tweets.json')
+    # annotate
+    for i, tweet in enumerate(data):
+        print(f'{i} / {len(data)}')
+        sent = sentiment(tweet['text'])
+        tweet['sentiment'] = sent
+    with open('data/tweets_sent.json', 'w') as f:
+        json.dump(data, f)
 
 
-def sentiment(text):
-    """
-    Analyse text in Czech language for sentiment.
-    :param text: text to be analyzed
-    :return: NEG, NEU or POS
-    """
-    blockPrint()
-    model = CNN('combined')
-    model.load()
-    result = model.predict(text)
-    enablePrint()
-    if result == 0:
-        return 'NEG'
-    elif result == 1:
-        return 'NEU'
-    elif result == 2:
-        return 'POS'
-    raise ValueError()
+if __name__ == '__main__':
+    main()
