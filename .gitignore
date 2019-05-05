@@ -3,3 +3,4 @@ data/
 sentiment_analysis/models/combined_corpora_processed.bin
 __pycache__
 *.json
+venv/
