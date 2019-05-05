@@ -1,7 +1,7 @@
 from ufal.nametag import *
 
 NER_MODEL_PATH = 'czech-cnec2.0-140304-no_numbers.ner'
-NER = Ner.load('/home/jaroslav/Downloads/czech-cnec-140304/czech-cnec2.0-140304-no_numbers.ner')
+NER = Ner.load(NER_MODEL_PATH)
 
 
 def get_name_entity(entity, text, tokens):
@@ -36,6 +36,7 @@ def get_locatable_entities(text):
 
 if __name__ == '__main__':
     import json
+
     tweets = json.load(open('tweets.json'))
     for tweet in tweets:
         if tweet['coordinates'] is None:
