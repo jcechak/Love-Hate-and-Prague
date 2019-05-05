@@ -30,6 +30,10 @@ def prepare_twitter_geojson():
 
 
 def make_geosestate(estate):
+    estate['floor area'] = estate['floorArea']
+    del estate['floorArea']
+    if estate['price']:
+        estate['price'] = '{:,}'.format(estate['price']).replace(',', ' ') + ' CZK'
     return {
         "type": "Feature",
         "geometry": {
