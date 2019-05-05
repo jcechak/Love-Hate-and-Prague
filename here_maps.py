@@ -14,7 +14,7 @@ def make_geotweet(tweet):
         "geometry": tweet["coordinates"],
         "properties": {
             "text": '"' + tweet['text'] + '"',
-            "sentiment": 0
+            "sentiment": tweet['sentiment']
         }
     }
 
