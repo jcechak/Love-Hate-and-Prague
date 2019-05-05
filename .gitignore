@@ -1,3 +1,4 @@
+data/
 .idea/
 sentiment_analysis/models/combined_corpora_processed.bin
 __pycache__
