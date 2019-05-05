@@ -1,6 +1,6 @@
 import json
 
-from scraper import load_tweets
+from twitter_scraper import load_tweets
 from sentiment_analysis.main import sentiment
 
 

@@ -1,8 +1,9 @@
 aniso8601==3.0.2
-beautifulsoup4
+beautifulsoup4==4.7.1
 certifi==2019.3.9
 chardet==3.0.4
 Cython==0.29.7
+enum34==1.1.6
 fasttext==0.8.3
 future==0.17.1
 googlemaps==3.0.2
@@ -18,6 +19,7 @@ nltk==3.4.1
 numpy==1.16.3
 oauthlib==3.0.1
 pbr==5.2.0
+pkg-resources==0.0.0
 promise==2.2.1
 PySocks==1.6.8
 python-google-places==1.4.1
@@ -27,6 +29,7 @@ requests-oauthlib==1.2.0
 Rx==1.6.1
 scipy==1.2.1
 six==1.12.0
+soupsieve==1.9.1
 stevedore==1.30.1
 tweepy==3.7.0
 urllib3==1.24.3

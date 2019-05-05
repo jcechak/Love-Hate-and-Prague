@@ -5,10 +5,10 @@ import tweepy
 
 
 def scrape(max_tweets=10000):
-    consumer_key = os.environ['API_KEY']
-    consumer_secret = os.environ['API_SECRET_KEY']
-    access_token = os.environ['ACCESS_TOKEN']
-    access_token_secret = os.environ['ACCESS_TOKEN_SECRET']
+    consumer_key = os.environ['TWITTER_API_KEY']
+    consumer_secret = os.environ['TWITTER_API_SECRET_KEY']
+    access_token = os.environ['TWITTER_ACCESS_TOKEN']
+    access_token_secret = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
@@ -32,17 +32,18 @@ def scrape(max_tweets=10000):
             new_tweets = api.search(**kwargs)
             if new_tweets:
                 print('found {} new tweets!'.format(len(new_tweets)))
-                max_id = new_tweets[-1].id
+                max_id = new_tweets[-1].id - 1
             else:
                 print('no new tweets!')
                 break
-            for tweet in new_tweets:
+            if tweet_count != 0:
+                f.write(',\n')
+            for tweet in new_tweets[:-1]:
                 f.write(json.dumps(tweet._json, indent=4) + ',\n')
+            f.write(json.dumps(new_tweets[-1]._json, indent=4))
             tweet_count += len(new_tweets)
         f.write(']\n')
 
 
 def load_tweets(filename='tweets.json'):
     return json.load(open(filename))
-
-
