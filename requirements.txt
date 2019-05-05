@@ -1,5 +1,6 @@
 aniso8601==3.0.2
 beautifulsoup4==4.7.1
+unidecode
 certifi==2019.3.9
 chardet==3.0.4
 Cython==0.29.7

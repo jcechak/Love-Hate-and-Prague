@@ -1,13 +1,32 @@
-from googleplaces import GooglePlaces
-import os
+import json
+
+from geocoding import geocoding
 
 
-def get_location(text):
-    google_api_key = os.environ['GOOGLE_MAPS_API_KEY']
-    gmaps = GooglePlaces(google_api_key)
-    jsonresult = gmaps.text_search(text + " ,Praha", lat_lng={'lat': 50.075538, 'lng': 14.437800}, radius=50000)
-    jsonresult.places.reverse()
-    place = jsonresult.places.pop()
-    lat = place.geo_location.get('lat')
-    lng = place.geo_location.get('lng')
-    return {'lat': float(lat), 'lng': float(lng)}
+def main():
+    """
+    Enhance data with geo coordinates using geocoding.
+    """
+    with open('data/tweets_sent.json', 'r') as f:
+        data = json.load(f)
+    for i, tweet in enumerate(data):
+        print(f'{i} / {len(data)}')
+        # geocoding
+        coord = geocoding(tweet['text'])
+        if coord:
+            tweet['coordinates'] = {
+                'type': 'Point',
+                'coordinates': [
+                    coord['lng'],
+                    coord['lat']
+                ]
+            }
+    # filter only with coordinates
+    data = [tweet for tweet in data if tweet['coordinates'] is not None]
+    print('Size: ', len(data))
+    with open('data/tweets_complete.json', 'w') as f:
+        json.dump(data, f, sort_keys=True, indent=True)
+
+
+if __name__ == '__main__':
+    main()

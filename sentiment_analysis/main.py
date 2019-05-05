@@ -4,6 +4,8 @@ import warnings
 
 from sentiment_analysis.model import CNN
 
+model = CNN('combined')
+model.load()
 
 # Disable
 def blockPrint():
@@ -26,8 +28,6 @@ def sentiment(text):
     :return: NEG, NEU or POS
     """
     blockPrint()
-    model = CNN('combined')
-    model.load()
     result = model.predict(text)
     enablePrint()
     if result == 0:
